@@ -1,0 +1,11 @@
+# Debug files
+*.mtud
+DefaultBuild/
+SourceInsight/
+Boot/DefaultBuild
+Flash/DefaultBuild
+trash/
+IgnoreBackUp/
+ReferenceData/
+
+.vscode/settings.json
