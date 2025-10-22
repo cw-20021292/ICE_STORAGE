@@ -3,8 +3,8 @@
 /// @author   Jaejin Ham
 /// @brief    얼음 기능 관련 AC Motor Control file
 
-#ifndef _HAL_AC_MOTOR_ICE_MAKING_H_
-#define _HAL_AC_MOTOR_ICE_MAKING_H_
+#ifndef _LIB_AC_MOTOR_ICE_MAKING_H_
+#define _LIB_AC_MOTOR_ICE_MAKING_H_
 
 
 /*  제빙 관련 AC 모터 제어 Function 사용법

@@ -8,10 +8,10 @@
 
 /// @brief  Time 스케쥴러 관리 자료형
 typedef struct {
-    void    (*FunctionPointer[MAX_FUNCTION_POINTER])(void);     // 함수 포인터 입력
-    U16     mu16Counter[MAX_FUNCTION_POINTER];                  // 함수 실행 주기 카운터, 카운트 되면서 주기적으로 함수를 실행함. Counter > CallTimeCycle에서 리셋됨
-    U16     mu16CallTimeCycle[MAX_FUNCTION_POINTER];            // 함수 실행 주기 저장소
-    U8      mu8ActCount[MAX_FUNCTION_POINTER];                  // 수행 횟수 제한이 있는지 체크 변수
+    void    (*FunctionPointer[MAX_FUNCTION_POINTER_MAX])(void);     // 함수 포인터 입력
+    U16     mu16Counter[MAX_FUNCTION_POINTER_MAX];                  // 함수 실행 주기 카운터, 카운트 되면서 주기적으로 함수를 실행함. Counter > CallTimeCycle에서 리셋됨
+    U16     mu16CallTimeCycle[MAX_FUNCTION_POINTER_MAX];            // 함수 실행 주기 저장소
+    U8      mu8ActCount[MAX_FUNCTION_POINTER_MAX];                  // 수행 횟수 제한이 있는지 체크 변수
 }   typeTimeSchedule;
 
 
@@ -37,7 +37,7 @@ void CounterTimeScheduler(void)
 {
     U8 mu8i = 0;
 
-    for (mu8i = 0 ; mu8i < MAX_FUNCTION_POINTER ; mu8i++)
+    for (mu8i = 0 ; mu8i < MAX_FUNCTION_POINTER_MAX ; mu8i++)
     {
         if (tTimeSceduleHandler.mu16CallTimeCycle[mu8i] != 0)
         {
@@ -62,7 +62,7 @@ void InitializeTimeScheduler(void)
     U8 mu8j = 0;
 
 // While 문 안에서 처리
-    for (mu8i = 0 ; mu8i < MAX_FUNCTION_POINTER ; mu8i++)
+    for (mu8i = 0 ; mu8i < MAX_FUNCTION_POINTER_MAX ; mu8i++)
     {
         tTimeSceduleHandler.FunctionPointer[mu8i] = NULL;
         tTimeSceduleHandler.mu16Counter[mu8i] = 1;             // CallTimeCycle과 비교를 위해 1로 세팅
@@ -89,7 +89,7 @@ void GoTimeScheduler(void)
 {
     U8 mu8i = 0;
 
-    for (mu8i = 0 ; mu8i < MAX_FUNCTION_POINTER ; mu8i++)
+    for (mu8i = 0 ; mu8i < MAX_FUNCTION_POINTER_MAX ; mu8i++)
     {
         if (tTimeSceduleHandler.mu16CallTimeCycle[mu8i] != 0)
         {
@@ -112,10 +112,7 @@ void GoTimeScheduler(void)
     }
 }
 
-
-
-
-/// @brief      스케쥴러에 함수를 등록 하는 함수
+/// @brief   스케쥴러에 함수를 등록 하는 함수
 /// @details    Time 스케쥴러에 함수와 호출 주기를 설정한다
 /// @param      *tFuction : 등록할 함수 포인터
 ///             mu16Timer : 실행할 주기(시간, 1ms 단위)
@@ -125,7 +122,7 @@ void SetupTimeScheduler(void (*tFuction)(void), U16 mu16Timer, U8 mu8ActionCount
 {
     U8 mu8i = 0;
 
-    for (mu8i = 0 ; mu8i < MAX_FUNCTION_POINTER ; mu8i++ )
+    for (mu8i = 0 ; mu8i < MAX_FUNCTION_POINTER_MAX ; mu8i++ )
     {
         if (tTimeSceduleHandler.FunctionPointer[mu8i] == NULL)
         {
@@ -148,7 +145,7 @@ void StartTimeScheduler(void (*tFuction)(void), U16 mu16Timer, U8 mu8ActionCount
 {
     U8 mu8i = 0;
 
-    for (mu8i = 0 ; mu8i < MAX_FUNCTION_POINTER ; mu8i++)
+    for (mu8i = 0 ; mu8i < MAX_FUNCTION_POINTER_MAX ; mu8i++)
     {
         if ( (tTimeSceduleHandler.FunctionPointer[mu8i] == tFuction) ||
             (tTimeSceduleHandler.FunctionPointer[mu8i] == NULL) )
@@ -170,7 +167,7 @@ void StopTimeScheduler(void (*tFuction)(void))
 {
     U8 mu8i = 0;
 
-    for (mu8i = 0 ; mu8i < MAX_FUNCTION_POINTER ; mu8i++ )
+    for (mu8i = 0 ; mu8i < MAX_FUNCTION_POINTER_MAX ; mu8i++ )
     {
         if (tTimeSceduleHandler.FunctionPointer[mu8i] == tFuction)
         {
@@ -191,7 +188,7 @@ void DeleteTimeScheduler(void (*tFuction)(void))
 {
     U8 mu8i = 0;
 
-    for (mu8i = 0 ; mu8i < MAX_FUNCTION_POINTER ; mu8i++ )
+    for (mu8i = 0 ; mu8i < MAX_FUNCTION_POINTER_MAX ; mu8i++ )
     {
         if (tTimeSceduleHandler.FunctionPointer[mu8i] == tFuction)
         {
@@ -252,7 +249,7 @@ void Setup1msTimeInterruptScheduler(void (*tFuction)(void), U16 mu16Timer, U8 mu
 {
     U8 mu8i = 0;
 
-    for (mu8i = 0 ; mu8i < MAX_FUNCTION_POINTER ; mu8i++ )
+    for (mu8i = 0 ; mu8i < MAX_FUNCTION_POINTER_MAX ; mu8i++ )
     {
         if (t1msTimerInterruptHandler.FunctionPointer[mu8i] == NULL)
         {
@@ -275,7 +272,7 @@ void Start1msTimeInterruptScheduler(void (*tFuction)(void), U16 mu16Timer, U8 mu
 {
     U8 mu8i = 0;
 
-    for (mu8i = 0 ; mu8i < MAX_FUNCTION_POINTER ; mu8i++)
+    for (mu8i = 0 ; mu8i < MAX_FUNCTION_POINTER_MAX ; mu8i++)
     {
         if ( (t1msTimerInterruptHandler.FunctionPointer[mu8i] == tFuction) ||
             (t1msTimerInterruptHandler.FunctionPointer[mu8i] == NULL) )
@@ -297,7 +294,7 @@ void Stop1msTimeInterruptScheduler(void (*tFuction)(void))
 {
     U8 mu8i = 0;
 
-    for (mu8i = 0 ; mu8i < MAX_FUNCTION_POINTER ; mu8i++ )
+    for (mu8i = 0 ; mu8i < MAX_FUNCTION_POINTER_MAX ; mu8i++ )
     {
         if (t1msTimerInterruptHandler.FunctionPointer[mu8i] == tFuction)
         {
@@ -318,7 +315,7 @@ void Delete1msTimeScheduler(void (*tFuction)(void))
 {
     U8 mu8i = 0;
 
-    for (mu8i = 0 ; mu8i < MAX_FUNCTION_POINTER ; mu8i++ )
+    for (mu8i = 0 ; mu8i < MAX_FUNCTION_POINTER_MAX ; mu8i++ )
     {
         if (t1msTimerInterruptHandler.FunctionPointer[mu8i] == tFuction)
         {

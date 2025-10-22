@@ -73,7 +73,6 @@
 #include "Hal_BLDC_Comp.h"
 #include "Hal_TEM.h"
 /* 얼음 관련 */
-#include "Hal_AC_Motor_IceMaking.h"
 #include "Hal_IceSwingBar.h"
 #include "Hal_Input_IceTray.h"
 #include "Hal_Motor_GasSwitch.h"
@@ -82,6 +81,7 @@
 
 
 // Header files for Operation
+#include "Lib_AC_Motor_IceMaking.h"
 #include "Lib_ADConvert.h"
 #include "Lib_Buzzer.h"
 #include "Lib_EEPROM.h"

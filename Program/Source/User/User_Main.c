@@ -100,6 +100,8 @@ void User_Main(void)
         GoTimeScheduler();          // Time Scheduler 제어 동작
         FunctionProcess_In_WhileLoop();     // 부하 제어 Loop
         WifiControlProcess(WIFI_TIME_WHILE);    // Wi-Fi While 동작
+
+        
     }
 }
 

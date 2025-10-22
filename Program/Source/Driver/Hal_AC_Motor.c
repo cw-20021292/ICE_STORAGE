@@ -11,7 +11,7 @@
 
 /// @brief  AC Motor 제어 관리 자료형
 typedef struct {
-    U8  au8Status[DC_PUMP_ID_MAX_COUNT];        // AC Motor Status - 0(OFF), 1(CW), 2(CCW)
+    U8  au8Status[AC_MOTOR_ID_MAX];        // AC Motor Status - 0(OFF), 1(CW), 2(CCW)
 }   SAC_MotorData_T;
 
 SAC_MotorData_T      SAC_MotorControlData;      // AC Motor Control Data

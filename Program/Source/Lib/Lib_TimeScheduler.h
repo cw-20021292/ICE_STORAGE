@@ -37,9 +37,41 @@ interrupt timer_1ms(void)       // 1ms 타이머 인터럽트
 // SetupTimerscheduler의 최대 설정 가능 시간은 1분(60000)까지만 가능
 
 */
+typedef enum {
+  /* 1ms */
 
-#define MAX_FUNCTION_POINTER                    20          // Limit the maximum number of schedulers to 20
-#define MAX_FUNCTION_INTP_POINTER               5           // 5 schedulers handled directly within 1ms interrupt
+  
+  /* 10ms */
+  PROCESS_KEY,            // 키 입력 처리
+  PROCESS_WATER_OUT,      // 물 추출 관련 (밸브 포함)
+
+  /* 100ms */
+  PROCESS_ERROR,
+  PROCESS_EERPOM,
+  PROCESS_DISPLAY,
+  
+  PROCESS_FLOW_METER,     // 유량계산
+
+  PROCESS_STORE_ICE,      // 보냉
+  PROCESS_COLD_MAKE,      // 냉각
+  PROCESS_ICE_MAKE,       // 제빙, 핫가스
+
+  AGING,                  // 에이징모드
+
+  MAX_FUNCTION_POINTER_MAX
+} FUNCTIONS;
+
+typedef enum {
+  TEMP_INPUT,             // 온도센서 입력
+  LEVEL_INPUT,            // 수위 입력
+
+  VALVE_CONTROL,          // 밸브 제어
+
+  MAX_FUNCTION_INTP_POINTER
+} FUNC_1MS;
+
+// #define MAX_FUNCTION_POINTER_MAX                    20          // Limit the maximum number of schedulers to 20
+// #define MAX_FUNCTION_INTP_POINTER               5           // 5 schedulers handled directly within 1ms interrupt
 
 
 #define ACT_COUNT_INFINITE                      0           // 계속 수행
